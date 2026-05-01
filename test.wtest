@@ -1,0 +1,37 @@
+import camion.*
+import cosas.*
+describe "camion de transporte "{
+    test "accidente en camion"{
+        contenedorPortuario.agregarCosa(knightRider)
+        bumblebee.estaTransformado(false)
+        contenedorPortuario.agregarCosa(bumblebee)
+        residuosRadioactivos.pesoResiduos(30)
+        embalajeDeSeguridad.objetoEnEmbalaje(residuosRadioactivos)
+        camion.cargar(contenedorPortuario)
+        camion.cargar(embalajeDeSeguridad)
+        arenaAGranel.pesoTotal(50)
+        camion.cargar(arenaAGranel)
+        paqueteDeLadrillos.cantidadDeLadrillos(100)
+        camion.cargar(paqueteDeLadrillos) 
+        bateriaAntiaerea.estaCargada(true)
+        camion.cargar(bateriaAntiaerea)
+        camion.accidente()
+        assert.equals(true, bumblebee.estaTransformado())
+        assert.equals(30, residuosRadioactivos.peso())
+        assert.equals(70, arenaAGranel.peso())
+        assert.equals(88, paqueteDeLadrillos.cantidadDeLadrillos())
+        assert.equals(false, bateriaAntiaerea.estaCargada())
+    }
+    test "camion puede viajar por ruta"{
+        almacen.almacen(knightRider)
+        almacen.almacen(residuosRadioactivos)
+        bumblebee.estaTransformado(false)
+        camion.cargar(bumblebee)
+        arenaAGranel.pesoTotal(50)
+        camion.cargar(arenaAGranel)
+        camion.transportar(almacen, ruta)
+        assert.equals(#{knightRider, residuosRadioactivos, bumblebee, arenaAGranel}, almacen.almacenado())
+        assert.equals(#{}, camion.cosas())
+}
+
+}
