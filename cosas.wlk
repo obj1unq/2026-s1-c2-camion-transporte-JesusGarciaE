@@ -7,6 +7,12 @@ object knightRider {
 	}
 	method accidente() {
 	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+	}
+	method bultos() {
+		return 1
+	}
 }
 
 object arenaAGranel {
@@ -22,6 +28,12 @@ object arenaAGranel {
 	}
 	method accidente() {
 		pesoTotal = pesoTotal + 20
+	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+	}
+	method bultos() {
+		return 1
 	}
 }
 
@@ -46,6 +58,12 @@ object bumblebee {
 	}
 	method accidente() {
 		estaTransformado = not (estaTransformado)
+	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+	}
+	method bultos() {
+		return 2
 	}
 }
 
@@ -75,6 +93,15 @@ object paqueteDeLadrillos {
 		else {
 			cantidadDeLadrillos = 0
 		}
+	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+	}
+	method bultos() {
+		return (self.cantidadEnteraDeBultos()).truncate(0) + 1
+	}
+	method cantidadEnteraDeBultos() {
+		return cantidadDeLadrillos / 100
 	}
 }	
 object bateriaAntiaerea {
@@ -112,7 +139,17 @@ object bateriaAntiaerea {
 	method accidente() {
 		estaCargada = false
 	}
-  
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+	}
+	method bultos() {
+		return if (self.estaCargada()) {
+			2
+		}
+		else {
+			1
+		}
+	}
 }
 
 
@@ -136,6 +173,12 @@ object residuosRadioactivos {
 	method accidente() {
 		pesoResiduos = pesoResiduos + 15
 	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+	}
+	method bultos() {
+		return 1
+	}
 }
 
 object contenedorPortuario {
@@ -145,13 +188,19 @@ object contenedorPortuario {
 		return pesoContenedor + cosasEnContenedor.sum({cosa => cosa.peso()})
 	}
 	method nivelPeligrosidad() {
-		return cosasEnContenedor.max({cosa => cosa.nivelPeligrosidad()})
+		return cosasEnContenedor.map({cosa => cosa.nivelPeligrosidad()}).max()
 	}
 	method accidente() {
 		cosasEnContenedor.forEach({cosa => cosa.accidente()})
 	}
 	method agregarCosa(cosa) {
 		cosasEnContenedor.add(cosa)
+	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+	}
+	method bultos() {
+		return cosasEnContenedor.sum({cosa => cosa.bultos()}) + 1
 	}
 }
 
@@ -167,6 +216,12 @@ object embalajeDeSeguridad{
 	}
 	method objetoEnEmbalaje(_objetoEnEmbalaje) {
 		objetoEnEmbalaje = _objetoEnEmbalaje
+	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+	}
+	method bultos() {
+		return 2
 	}
 }
 

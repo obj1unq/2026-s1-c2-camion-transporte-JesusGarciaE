@@ -26,8 +26,8 @@ object camion {
 	method pesoEnCamion() {
 		return cosas.sum({cosa => cosa.peso()}) 
 	}
-	method pesoPar(){
-		return self.pesoEnCamion() % 2 == 0
+	method todoPesoPar(){
+		return cosas.map({cosa => cosa.esPesoPar()})
 	}
 	method hayDePesoIgualA(peso) {
 		return cosas.any({cosa => cosa.peso() == peso})
@@ -54,7 +54,7 @@ object camion {
 		return cosas.map({cosa => cosa.peso()})
 	}
 	method totalDeBultos(){
-		return cosas.size()
+		return cosas.sum({{cosa => cosa.bultos()}})
 	}
 	method accidente(){
 		cosas.forEach({cosa => cosa.accidente()})
